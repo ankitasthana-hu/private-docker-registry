@@ -29,7 +29,10 @@ kubectl port-forward service/docker-registry 5000 -n docker-registry
 ## Production Setup
 
 1) Define record set in Route53 register domain to point K8s cluster.
-2) cert-manager will automatically create a TLS certificate using Issuer and Certificate resources using Let's Encrypt
+<img width="856" alt="Screenshot 2022-06-10 at 9 22 12" src="https://user-images.githubusercontent.com/59736927/173012477-90744673-3cd0-4211-baf8-d9a131130d7d.png">
+
+
+3) cert-manager will automatically create a TLS certificate using Issuer and Certificate resources using Let's Encrypt
 
 	 curl -u user:password https://registry.yourcompany.com/v2/_catalog
 
