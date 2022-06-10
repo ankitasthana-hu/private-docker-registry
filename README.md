@@ -14,13 +14,17 @@ Install cert-manager:
 kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.0.2/cert-manager.yaml 
 
 Install this docker-registry solution with Helm ( considering values.yaml is up to date ):
+```
 helm install docker-registry ./docker-registry
+```
+
 or
-{code}
+
+```
 helm install docker-registry ./docker-registry \
 --set registry.dns=registry.cmcloudlab782.info \
 --set registry.email=ankit.asthana49@gmail.com 
-{code}
+```
 
 
 Note: admin / admin1234 credentials should be changed for Production usage mentioned in values.yaml
@@ -44,15 +48,17 @@ kubectl port-forward service/docker-registry 5000 -n docker-registry
 
 
 ## Test
-
+```
 docker login https://registry.cmcloudlab782.info -u admin -p admin1234
-docker pull busybox:latest
-docker tag busybox:latest registry.cmcloudlab782.info/busybox:latest
-docker push registry.cmcloudlab782.info/busybox:latest
+docker pull ubuntu:latest
+docker tag ubuntu:latest registry.cmcloudlab782.info/ubuntu:latest
+docker push registry.cmcloudlab782.info/ubuntu:latest
+```
 
 ## Clean Up
-
+```
 helm uninstall docker-registry
+```
 
 
 ##### Additional Task
