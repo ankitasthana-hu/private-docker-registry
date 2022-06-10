@@ -26,8 +26,26 @@ helm install docker-registry ./docker-registry \
 --set registry.email=ankit.asthana49@gmail.com 
 ```
 
+Output of helm chart
+```
+W0610 08:25:16.585429   21631 warnings.go:67] batch/v1beta1 CronJob is deprecated in v1.21+, unavailable in v1.25+; use batch/v1 CronJob
+W0610 08:25:16.696183   21631 warnings.go:67] batch/v1beta1 CronJob is deprecated in v1.21+, unavailable in v1.25+; use batch/v1 CronJob
+NAME: docker-registry
+LAST DEPLOYED: Fri Jun 10 08:25:16 2022
+NAMESPACE: default
+STATUS: deployed
+REVISION: 5
+NOTES:
+1. To access docker-registry locally, just type:
+
+  kubectl port-forward service/docker-registry 5000 -n docker-registry
+
+2. You can test if it works with the following command:
+
+  curl -u admin:admin1234 localhost:5000/v2/_catalog
 
 Note: admin / admin1234 credentials should be changed for Production usage mentioned in values.yaml
+```
 
 ## Local Setup
 
