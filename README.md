@@ -52,7 +52,39 @@ Note: admin / admin1234 credentials should be changed for Production usage menti
 kubectl port-forward service/docker-registry 5000 -n docker-registry
 
          curl -u admin:admin1234 localhost.com:5000/v2/_catalog
+###### Pull, tag and Push image
+```
+root@master1:/# docker pull nginx
+Using default tag: latest
+latest: Pulling from library/nginx
+bf5952930446: Pull complete
+cb9a6de05e5a: Pull complete
+9513ea0afb93: Pull complete
+b49ea07d2e93: Pull complete
+a5e4a503d449: Pull complete
+Digest: sha256:b0ad43f7ee5edbc0effbc14645ae7055e21bc1973aee5150745632a24a752661
+Status: Downloaded newer image for nginx:latest
+docker.io/library/nginx:latest
+root@master1:/# 
+root@master1:/# docker tag nginx:latest localhost:5000/mynginx:v1
+root@master1:/# 
+root@master1:/# docker push localhost:5000/mynginx:v1
+The push refers to repository [docker-registry:5000/mynginx]
+550333325e31: Layer already exists
+22ea89b1a816: Layer already exists
+a4d893caa5c9: Layer already exists
+0338db614b95: Layer already exists
+d0f104dc0a1f: Layer already exists
+v1: digest: sha256:179412c42fe3336e7cdc253ad4a2e03d32f50e3037a860cf5edbeb1aaddb915c size: 1362
+```
 
+######  Verify image within private docker repo
+```
+root@master1:/# kubectl exec pod/docker-registry-84986b68bc-564m4 -it -- sh
+/ # ls /var/lib/registry/docker/registry/v2/repositories/
+mynginx
+/ #
+```
 
 ## Production Setup
 
