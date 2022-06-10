@@ -1,0 +1,68 @@
+# Default values for docker-registry.
+
+replicaCount: 2
+
+image:
+  repository: nginx
+  pullPolicy: Always
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: false
+  annotations: {}
+  name: "registry"
+
+podAnnotations: {}
+
+podSecurityContext: {}
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  type: NodePort
+  port: 80
+
+ingress:
+  enabled: false
+  annotations: {}
+  hosts:
+    - host: chart-example.local
+      paths: []
+  tls: []
+
+resources:
+   limits:
+     cpu: 100m
+     memory: 128Mi
+   requests:
+     cpu: 100m
+     memory: 128Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 50
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+nodeSelector: {}
+tolerations: []
+affinity: {}
+
+# Deployment values
+registry:
+  dns: registry.wolt.com
+  username: admin
+  password: admin1234
+  email: sherar@gmail.com
+  htpasswd: YWRtaW46JDJ5JDA1JDlkc0VWcGphUGVNWWFSYzA1WmNyb09OSy9wSVV6ZXdZLzhlQkNhL09Md3lXL0xLOGkxdGNhCgo=
+  storage: 5Gi

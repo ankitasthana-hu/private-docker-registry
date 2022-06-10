@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cronfile
+  namespace: docker-registry
+  labels:
+    app: registry
+    tier: frontend
+data:
+  cronfile: 0 */12 * * *    bin/registry garbage-collect /etc/docker/registry/config.yml

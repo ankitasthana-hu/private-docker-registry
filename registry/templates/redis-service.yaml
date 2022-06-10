@@ -1,0 +1,16 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: redis
+  namespace: docker-registry
+  labels:
+    app: redis
+    tier: backend
+spec:
+  selector:
+    app: redis
+  ports:
+  - name: http
+    port: 6379
+    targetPort: 6379

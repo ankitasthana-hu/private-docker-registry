@@ -1,0 +1,27 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: docker-registry-pruner
+  namespace: docker-registry
+  labels:
+    app: docker-registry-pruner
+    tier: backend
+spec:
+  schedule: "*/12 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: pruner
+            image: tumblr/docker-registry-pruner
+            args: 
+            - --mode prune --config ./config/myconfig.yaml
+            volumeMounts:
+            - name: pruner-config
+              mountPath: /app/config/
+          restartPolicy: OnFailure
+          volumes:
+            - name: pruner-config
+              configMap:
+                name: pruner-config

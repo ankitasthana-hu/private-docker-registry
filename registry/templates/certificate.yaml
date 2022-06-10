@@ -1,0 +1,14 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: docker-registry
+  labels:
+    app: certificate
+    tier: backend
+spec:
+  secretName: docker-registry-tls-certificate
+  issuerRef:
+    name: acme-issuer
+  dnsNames:
+  - {{ .Values.registry.dns }}

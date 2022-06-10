@@ -1,0 +1,16 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: docker-registry
+  namespace: docker-registry
+  labels:
+    app: registry
+    tier: frontend
+spec:
+  type: ClusterIP
+  selector:
+    app: docker-registry
+  ports:
+  - name: http
+    port: 5000
+    targetPort: 5000

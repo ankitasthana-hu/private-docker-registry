@@ -1,0 +1,19 @@
+## v01 is depreciated.
+---
+apiVersion: cert-manager.io/v1alpha2
+kind: Issuer
+metadata:
+  name: acme-issuer
+  labels:
+    app: certificate
+    tier: backend
+spec:
+  acme:
+    email: {{ .Values.registry.email }}
+    server: https://acme-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: acme-issuer-account-key
+    solvers:
+    - http01: 
+        ingress:
+          class: nginx

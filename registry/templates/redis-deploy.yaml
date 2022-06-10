@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-master
+  namespace: docker-registry
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+        tier: backend
+    spec:
+      containers:
+        - image: redis:6.0.8
+          name: master
+          imagePullPolicy: Always
+          volumeMounts:
+            - name: redisdata
+              mountPath: /data
+              subPath: redisdata
+      volumes:
+        - name: redisdata
+          persistentVolumeClaim:
+            claimName: redisdata
