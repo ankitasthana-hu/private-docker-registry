@@ -15,6 +15,10 @@ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/relea
 
 Install this docker-registry solution with Helm ( considering values.yaml is up to date ):
 helm install docker-registry ./docker-registry
+or
+helm install docker-registry ./docker-registry \
+--set registry.dns=registry.cmcloudlab782.info \
+--set registry.email=ankit.asthana49@gmail.com 
 
 
 Note: admin / admin1234 credentials should be changed for Production usage mentioned in values.yaml
